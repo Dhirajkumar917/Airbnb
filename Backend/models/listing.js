@@ -9,13 +9,25 @@ const listingSchema = new Schema({
     description: String,
     image: {
         type: String,
-        default:
-            "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8",
-        set: (v) => v === "" ? "https://unsplash.com/photos/sunflower-field-during-day-time-lk3F07BN8T8" : v,
+            default:
+              "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80",
+        set: (v) => v === "" ?  "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80" : v,
     },
-    price: Number,
+    price:{ 
+        type: Number,
+        required: true,
+        min: 1,
+    },
+
     location: String,
     country: String,
+    reviews: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+        },
+    ],
+
 });
 
 const Listing = mongoose.model("Listing", listingSchema);
